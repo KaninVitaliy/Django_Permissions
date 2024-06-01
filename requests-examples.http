@@ -2,9 +2,11 @@
 
 @baseUrl = http://localhost:8000/api
 
-# получение объявлений
+# получение объявлений 
+# Для анонимов можно только 2 запроса в минуту, для авторизованных пользователей 10
 GET {{baseUrl}}/advertisements/
 Content-Type: application/json
+Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
 
 ###
 
@@ -19,9 +21,19 @@ Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
 }
 
 ###
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
 
-# попытка поменять объявление
-PATCH {{baseUrl}}/advertisements/1/
+{
+  "title": "Iphone 15",
+  "description": "Срочно"
+}
+
+###
+
+# попытка поменять объявление на статус CLOSED
+PATCH {{baseUrl}}/advertisements/2/
 Content-Type: application/json
 Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
 
@@ -29,14 +41,32 @@ Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
   "status": "CLOSED"
 }
 
-###
+### попытка поменять объявление на статус OPEN
 
+PATCH {{baseUrl}}/advertisements/2/
+Content-Type: application/json
+Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
+
+{
+  "status": "OPEN"
+}
+
+
+### 
 # фильтрация по создателю
-GET {{baseUrl}}/advertisements/?creator=2
+GET {{baseUrl}}/advertisements/?creator=1
 Content-Type: application/json
 
 ###
 
 # фильтрация по дате
-GET {{baseUrl}}/advertisements/?created_at_before=2020-10-01
+GET {{baseUrl}}/advertisements/?created_at=2024-05-14T08:03:52.164487Z
 Content-Type: application/json
+Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
+
+###
+
+# Фильтрация по статусу
+GET {{baseUrl}}/advertisements/?status=OPEN
+Content-Type: application/json
+Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
