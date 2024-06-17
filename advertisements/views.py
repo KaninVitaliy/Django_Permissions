@@ -5,12 +5,8 @@ from rest_framework import generics
 from advertisements.models import Advertisement
 from advertisements.serializers import AdvertisementSerializer
 from django_filters import rest_framework as filters
+from advertisements import filters as filters_advertisements
 
-
-class ProductFilter(filters.FilterSet):
-    class Meta:
-        model = Advertisement
-        fields = "__all__"
 
 
 class AdvertisementViewSet(ModelViewSet):
@@ -18,7 +14,7 @@ class AdvertisementViewSet(ModelViewSet):
     queryset = Advertisement.objects.all()
     serializer_class = AdvertisementSerializer
     filter_backends = (filters.DjangoFilterBackend,)
-    filterset_class = ProductFilter
+    filterset_class = filters_advertisements.AdvertisementFilter
 
     # TODO: настройте ViewSet, укажите атрибуты для кверисета,
     #   сериализаторов и фильтров

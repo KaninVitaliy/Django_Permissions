@@ -41,5 +41,16 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         """Метод для валидации. Вызывается при создании и обновлении."""
 
         # TODO: добавьте требуемую валидацию
+        status_obj = Advertisement.objects.all()
+        flag = True
+        count = 0
+        print(data)
+        for i in status_obj:
+            if i.status == "OPEN":
+                count += 1
+        if count == 10:
+            print(count)
+        elif count >= 10:
+            print("Уже есть 10 открытых объявлений, так нельзя ")
 
         return data
