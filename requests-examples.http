@@ -33,12 +33,12 @@ Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
 ###
 
 # попытка поменять объявление на статус CLOSED
-PATCH {{baseUrl}}/advertisements/2/
+PATCH {{baseUrl}}/advertisements/3/
 Content-Type: application/json
 Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
 
 {
-  "status": "CLOSED"
+  "status": "OPEN"
 }
 
 ### попытка поменять объявление на статус OPEN
@@ -68,5 +68,10 @@ Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
 
 # Фильтрация по статусу
 GET {{baseUrl}}/advertisements/?status=OPEN
+Content-Type: application/json
+Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
+
+### Удаление объявлений
+DELETE  {{baseUrl}}/advertisements/3
 Content-Type: application/json
 Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
