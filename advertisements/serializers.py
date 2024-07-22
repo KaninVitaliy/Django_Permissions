@@ -13,6 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
                   'last_name',)
 
 
+
 class AdvertisementSerializer(serializers.ModelSerializer):
     """Serializer для объявления."""
 
@@ -23,7 +24,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Advertisement
         fields = ('id', 'title', 'description', 'creator',
-                  'status', 'created_at', )
+                  'status', 'created_at',)
 
     def create(self, validated_data):
         """Метод для создания"""
@@ -37,20 +38,20 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         validated_data["creator"] = self.context["request"].user
         return super().create(validated_data)
 
-    def validate(self, data):
+    def validate(self, data, status_obj=None):
         """Метод для валидации. Вызывается при создании и обновлении."""
 
         # TODO: добавьте требуемую валидацию
         print(data)
         print(self.context["request"].user)
-        status_obj = Advertisement.objects.filter(creator=self.context["request"].user, status=data["status"]).count()
-        print(status_obj)
-        if status_obj >= 10:
-            raise serializers.ValidationError({"У пользователя не должно быть больше 10 открытых или закрытых объявлений"})
+        try:
 
+            status_obj = Advertisement.objects.filter(creator=self.context["request"].user,
+                                                      status=data["status"]).count()
+            print(status_obj)
+            if status_obj >= 10:
+                raise serializers.ValidationError(
+                    {"У пользователя не должно быть больше 10 открытых или закрытых объявлений"})
+        except:
+            pass
         return data
-
-    def delete(self):
-        print("TEST")
-        # validated_data["delete"] = self.context["request"].user
-        # return super().delete(validated_data)

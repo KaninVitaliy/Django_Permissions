@@ -6,14 +6,14 @@
 # Для анонимов можно только 2 запроса в минуту, для авторизованных пользователей 10
 GET {{baseUrl}}/advertisements/
 Content-Type: application/json
-Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
+Authorization: Token da3d970b7dbf3f7ec65f900d394bd5beb059a89d
 
 ###
 
 # создание объявления
 POST {{baseUrl}}/advertisements/
 Content-Type: application/json
-Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
+Authorization: Token da3d970b7dbf3f7ec65f900d394bd5beb059a89d
 
 {
   "title": "ТЕСТОВОЕ 13-е",
