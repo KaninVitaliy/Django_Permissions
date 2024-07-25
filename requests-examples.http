@@ -1,32 +1,33 @@
 # примеры API-запросов
 
 @baseUrl = http://localhost:8000/api
+@token = 76fdf1aeee41d9b7f94fee54e7a51fa2cdba43f9
 
 # получение объявлений 
 # Для анонимов можно только 2 запроса в минуту, для авторизованных пользователей 10
 GET {{baseUrl}}/advertisements/
 Content-Type: application/json
-Authorization: Token da3d970b7dbf3f7ec65f900d394bd5beb059a89d
+Authorization: Token {{token}}
 
 ###
 
 # создание объявления
 POST {{baseUrl}}/advertisements/
 Content-Type: application/json
-Authorization: Token da3d970b7dbf3f7ec65f900d394bd5beb059a89d
+Authorization: Token {{token}}
 
 {
-  "title": "ТЕСТОВОЕ 13-е",
+  "title": "ТЕСТОВОЕ 1-е",
   "description": "Срочно"
 }
 
 ###
 POST {{baseUrl}}/advertisements/
 Content-Type: application/json
-Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
+Authorization: Token {{token}}
 
 {
-  "title": "Iphone 15",
+  "title": "Тестовое 2-е",
   "description": "Срочно"
 }
 
@@ -35,7 +36,7 @@ Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
 # попытка поменять объявление на статус CLOSED
 PATCH {{baseUrl}}/advertisements/3/
 Content-Type: application/json
-Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
+Authorization: Token {{token}}
 
 {
   "status": "OPEN"
@@ -43,12 +44,12 @@ Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
 
 ### попытка поменять объявление на статус OPEN
 
-PATCH {{baseUrl}}/advertisements/2/
+PATCH {{baseUrl}}/advertisements/3/
 Content-Type: application/json
-Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
+Authorization: Token {{token}}
 
 {
-  "status": "OPEN"
+  "status": "CLOSED"
 }
 
 
@@ -62,16 +63,16 @@ Content-Type: application/json
 # фильтрация по дате
 GET {{baseUrl}}/advertisements/?created_at=2024-05-14T08:03:52.164487Z
 Content-Type: application/json
-Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
+Authorization: Token {{token}}
 
 ###
 
 # Фильтрация по статусу
-GET {{baseUrl}}/advertisements/?status=OPEN
+GET {{baseUrl}}/advertisements/?status=CLOSED
 Content-Type: application/json
-Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
+Authorization: Token 76fdf1aeee41d9b7f94fee54e7a51fa2cdba43f9
 
 ### Удаление объявлений
-DELETE  {{baseUrl}}/advertisements/3
+DELETE  {{baseUrl}}/advertisements/3/
 Content-Type: application/json
-Authorization: Token a148623609afa99e74a9f6d7fbe0a57f79993be4
+Authorization: Token {{token}}
